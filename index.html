@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style src="style.css"></style>
+ 
+  <body>
+    <header>
+      <h1>Expense Tracker</h1>
+    </header>
+
+        
+      <form onsubmit="myfunc(event)">
+         <h3>Enter Details</h3>
+        <div>
+          <label>Expense Amount</label>
+          <input type="text" name="amount" id="amount" >
+        </div>
+        <div>
+          <label>Expense Type</label>
+             <select name="type" id="etype">
+   
+      <option value="friend">Friend</option>
+      <option value="movie">Movie</option>
+      <option value="credit">Credit</option>
+      <option value="shopping">Shopping</option>
+      <option value="travel">Travel</option>
+      <option value="car">Car</option>
+      <option value="bike">Bike</option>
+      <option value="home">House</option>
+      <option value="self">Self</option> 
+  </select>
+   <div>
+          <label>Category</label>
+             <select name="cat" id="cat">
+   
+      <option value="petrol">Petrol</option>
+      <option value="Diesel">Diesel</option>
+      <option value="loan">Loan</option>
+      <option value="repair">Repair</option>
+      <option value="hospital">Hospital</option>
+      <option value="theatre">Theatre</option>
+      <option value="tickets">Tickets</option>
+      <option value="gym">GYM</option>
+  
+  </select>
+
+        </div>
+
+        </div>
+        <button>SUBMIT</button>
+      </form>
+
+    
+<ul id="listofitems"></ul>
+     
+   
+    
+
+    <script src="main.js"> </script>
+  </body>
+</html>

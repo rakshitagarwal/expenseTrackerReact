@@ -1,0 +1,11 @@
+.msg{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    border-bottom: 2px solid black;
+}
+
+.welcome {
+    
+    text-align: center
+}
