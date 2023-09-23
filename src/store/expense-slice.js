@@ -1,34 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { useSelector } from "react-redux";
 
-const initialExpenseState={expenses:[],totalAmount:0}
+const initialState = {
+  items: [],
+  editItems: null,
+};
 
+const expenseSlice = createSlice({
+  name: "expenses",
+  initialState,
+  reducers: {
+    addItem(state, action) {
+      state.items = [action.payload, ...state.items];
+      // console.log(state);
+    },
+    removeItem(state, action) {
+      const itemId = action.payload.id;
+      state.items = state.items.filter((item) => item.id !== itemId);
+    },
+    editItem(state, action) {
+      state.editItems = action.payload.item;
+      state.items = action.payload.filtered;
+    },
+    setItems(state, action) {
+      state.items = action.payload;
+    },
 
-const expenseSlice=createSlice({
-    name:'expense',
-    initialState:initialExpenseState,
-    reducers:{
-        addExpense(state,action){
-            const updatedExpenses=state.expenses.concat(action.payload.expense)
-            state.expenses=updatedExpenses
-            state.totalAmount=Number(state.totalAmount)+Number(action.payload.amount)
-        },
-        removeExpense(state,action){
-           state.expenses=action.payload.expenses
-           state.totalAmount=Number(state.totalAmount)-Number(action.payload.amount)
-        },
-        editExpense(state,action){
-            state.expenses=action.payload.expenses
-            state.totalAmount=Number(state.totalAmount)-Number(action.payload.amount)
-        },
-        replaceExpenses(state,action){
-            state.expenses=action.payload.expenses;
-            state.totalAmount=action.payload.amount
-        }
-        
-    }
-})
+    setEditItemsNull(state) {
+      state.editItems = null;
+    },
+    setItemsEmpty(state) {
+      state.items = [];
+    },
+  },
+});
 
-export const expenseActions=expenseSlice.actions;
-
-export default expenseSlice.reducer
+export const expenseActions = expenseSlice.actions;
+export default expenseSlice.reducer;
