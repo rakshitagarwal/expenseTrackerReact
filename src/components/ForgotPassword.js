@@ -34,7 +34,6 @@ const defaultTheme = createTheme();
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
-  // const authCntxt = React.useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,7 +43,7 @@ export default function ForgotPassword() {
 
     try {
       const res = await fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyA4SAXHYrgiGDnv6iLxGnM6era5CLULX8M",
+        "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDeTrjpAdKVNqCov-5MwyTKP3LyJuKbC-o",
         {
           method: "POST",
           body: JSON.stringify({

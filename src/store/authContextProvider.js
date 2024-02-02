@@ -11,15 +11,6 @@ export const AuthContextProvider = (props) => {
 
   const expCtx = useContext(ExpenseContext);
 
-  // const handleLogIn = async (token, email, cb = () => {}) => {
-  //   localStorage.setItem("token", token);
-  //   localStorage.setItem("email", email);
-  //   expCtxt.onLogin();
-  //   setEmail(localStorage.getItem("email"));
-  //   setToken(localStorage.getItem("token"));
-  //   cb(true);
-  // };
-
   const loginHandler = (tokenId, email) => {
     setToken(tokenId);
     setUserEmail(email);
@@ -36,14 +27,6 @@ export const AuthContextProvider = (props) => {
     localStorage.removeItem("userEmail");
     localStorage.clear();
   };
-
-  // const handleLogOut = () => {
-  //   setToken(null);
-  //   setEmail(null);
-  //   expCtxt.expenses = [];
-  //   localStorage.removeItem("token");
-  //   localStorage.removeItem("email");
-  // };
 
   setTimeout(() => {
     logoutHandler();

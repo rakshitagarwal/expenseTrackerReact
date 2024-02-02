@@ -24,8 +24,6 @@ export default function ExpenseForm() {
   const auth = useSelector((state) => state.auth);
   const expense = useSelector((state) => state.expenseStore);
   const dispatch = useDispatch();
-  // const ExpenseCntxt = React.useContext(ExpenseContext);
-  // const hasItems = (ExpenseCntxt.expenses || []).length > 0;
   const [isInputValid, setIsInputValid] = useState(true);
 
   useEffect(() => {
@@ -34,7 +32,6 @@ export default function ExpenseForm() {
       desInputRef.current.value = expense.editItems.enteredDes;
       cateRef.current.value = expense.editItems.category;
       setCategory(expense.editItems.category);
-      // dispatch(expenseActions.setEditItemsNull());
     }
   }, [expense.editItems]);
 
@@ -51,12 +48,10 @@ export default function ExpenseForm() {
 
     setIsInputValid(true);
     if (expense.editItems !== null) {
-      // expCtx.removeItem(expCtx.editItems);
-      console.log(expense.editItems);
       const email = auth.userEmail.replace(/[\.@]/g, "");
       try {
         const res = await axios.get(
-          `https://expense-tracker-1672f-default-rtdb.firebaseio.com/${email}/expenses.json`
+          `https://expense-tracker-6bd50-default-rtdb.firebaseio.com/${email}/expenses.json`
         );
 
         const data = res.data;
@@ -65,7 +60,7 @@ export default function ExpenseForm() {
         );
         try {
           const resDlt = await axios.delete(
-            `https://expense-tracker-1672f-default-rtdb.firebaseio.com/${email}/expenses/${Id}.json`
+            `https://expense-tracker-6bd50-default-rtdb.firebaseio.com/${email}/expenses/${Id}.json`
           );
         } catch (error) {
           alert(error);
@@ -74,7 +69,6 @@ export default function ExpenseForm() {
         alert(error);
       }
 
-      // dispatch(expenseActions.removeItem(expense.editItems));
       dispatch(expenseActions.setEditItemsNull());
     }
 
@@ -90,7 +84,7 @@ export default function ExpenseForm() {
 
     try {
       const res = await axios.post(
-        `https://expense-tracker-1672f-default-rtdb.firebaseio.com/${email}/expenses.json`,
+        `https://expense-tracker-6bd50-default-rtdb.firebaseio.com/${email}/expenses.json`,
         expDetail
       );
     } catch (error) {
@@ -114,7 +108,6 @@ export default function ExpenseForm() {
         >
           <Typography
             variant="h5"
-            // sx={{ fontWeight: "bold", color: "#19376D" }}
           >
             Add New Expense
           </Typography>
@@ -148,7 +141,6 @@ export default function ExpenseForm() {
                 required
                 inputRef={desInputRef}
                 id="description"
-                // label="Description"
                 name="description"
                 autoFocus
               />
@@ -161,7 +153,6 @@ export default function ExpenseForm() {
                 required
                 inputRef={amtInputRef}
                 name="expenseAmount"
-                // label="Expense Amount"
                 type="number"
                 id="expenseAmount"
               />
@@ -176,7 +167,6 @@ export default function ExpenseForm() {
                 inputRef={cateRef}
                 value={category}
                 onChange={handleChange}
-                // label="category"
               >
                 <MenuItem value={"Food"}>Food</MenuItem>
                 <MenuItem value={"Clothes"}>Clothes</MenuItem>

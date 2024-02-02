@@ -4,7 +4,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-// import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -20,7 +19,7 @@ export default function ProfileForm() {
   const updateVisibleHandler = async () => {
     try {
       const res = await fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyA4SAXHYrgiGDnv6iLxGnM6era5CLULX8M",
+        "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDeTrjpAdKVNqCov-5MwyTKP3LyJuKbC-o",
         {
           method: "POST",
           headers: {
@@ -33,7 +32,6 @@ export default function ProfileForm() {
       );
       const data = await res.json();
       if (data.users) {
-        // setUserData(data.users[0]);
         nameRef.current.value = data.users[0].displayName.toUpperCase() || "";
         contactRef.current.value = data.users[0].photoUrl || "";
       }
@@ -54,8 +52,6 @@ export default function ProfileForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // const enteredName = nameRef.current.value;
-    // const contact = contactRef.current.value;
 
     const data = new FormData(event.currentTarget);
     let userDetails = {
@@ -65,7 +61,7 @@ export default function ProfileForm() {
     console.log(userDetails);
 
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyA4SAXHYrgiGDnv6iLxGnM6era5CLULX8M",
+      "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDeTrjpAdKVNqCov-5MwyTKP3LyJuKbC-o",
       {
         method: "POST",
         body: JSON.stringify({
@@ -94,7 +90,6 @@ export default function ProfileForm() {
         }
       })
       .then((data) => {
-        // navigate("/home");
       })
       .catch((err) => {
         alert(err.message);
@@ -132,7 +127,6 @@ export default function ProfileForm() {
               mt: 1,
               display: "flex",
               flexDirection: "column",
-              // alignItems: "center",
             }}
           >
             <label>Full Name:</label>
@@ -140,7 +134,6 @@ export default function ProfileForm() {
               style={{ margin: 10 }}
               required={true}
               id="name"
-              // label="Full Name"
               name="name"
               inputRef={nameRef}
               autoFocus
@@ -152,7 +145,6 @@ export default function ProfileForm() {
               marginLeft: 2,
               display: "flex",
               flexDirection: "column",
-              // alignItems: "center",
             }}
           >
             <label>Contact no:</label>
@@ -160,7 +152,6 @@ export default function ProfileForm() {
               style={{ margin: 10 }}
               required={true}
               name="photoUrl"
-              // label="Photo url"
               id="photoUrl"
               inputRef={contactRef}
               autoFocus

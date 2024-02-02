@@ -2,13 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialAuthState = {
   token: localStorage.getItem("user"),
-  //   isLoggedIn: userLoggedIn,
   userEmail: localStorage.getItem("userEmail"),
   isPremium: localStorage.getItem("isPremium"),
   isLoggedIn: localStorage.getItem("isLoggedIn"),
 };
 
-// const userLoggedIn = !!initialAuthState.token;
 
 const authSlice = createSlice({
   name: "authentication",

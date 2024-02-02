@@ -11,7 +11,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-// import { Paper } from "@mui/material";
 import { useState } from "react";
 
 const defaultTheme = createTheme();
@@ -31,14 +30,13 @@ export default function SignUp() {
     const enteredPass = data.get("password");
     const enteredConPass = data.get("confirmpassword");
 
-    // const editedEmail = enteredEmail.replace("@", "").replace(".", "");
 
     if (enteredPass !== enteredConPass) {
       alert("Password do not match");
     }
     try {
       const res = await fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA4SAXHYrgiGDnv6iLxGnM6era5CLULX8M",
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDeTrjpAdKVNqCov-5MwyTKP3LyJuKbC-o",
         {
           method: "POST",
           body: JSON.stringify({
@@ -52,11 +50,10 @@ export default function SignUp() {
         }
       );
       const data = await res.json();
-      console.log(data);
       if (res.ok) {
         try {
           const response = await fetch(
-            "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyA4SAXHYrgiGDnv6iLxGnM6era5CLULX8M",
+            "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDeTrjpAdKVNqCov-5MwyTKP3LyJuKbC-o",
             {
               method: "POST",
               body: JSON.stringify({

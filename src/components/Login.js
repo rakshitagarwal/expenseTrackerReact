@@ -19,7 +19,6 @@ import { expenseActions } from "../store/expense-slice";
 
 export default function LogIn() {
   const navigate = useNavigate();
-  // const authCntxt = useContext(AuthContext);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
@@ -59,7 +58,7 @@ export default function LogIn() {
     const enteredPass = data.get("password");
     try {
       const res = await fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA4SAXHYrgiGDnv6iLxGnM6era5CLULX8M",
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDeTrjpAdKVNqCov-5MwyTKP3LyJuKbC-o",
         {
           method: "POST",
           body: JSON.stringify({
@@ -76,7 +75,7 @@ export default function LogIn() {
       if (res.ok) {
         try {
           const response = await fetch(
-            "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyA4SAXHYrgiGDnv6iLxGnM6era5CLULX8M",
+            "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDeTrjpAdKVNqCov-5MwyTKP3LyJuKbC-o",
             {
               method: "POST",
               body: JSON.stringify({
@@ -101,7 +100,7 @@ export default function LogIn() {
             );
             const email = enteredEmail.replace(/[\.@]/g, "");
             const modeRes = await axios.get(
-              `https://expense-tracker-1672f-default-rtdb.firebaseio.com/${email}/userDetail.json`
+              `https://expense-tracker-6bd50-default-rtdb.firebaseio.com/${email}/userDetail.json`
             );
             if (modeRes.data) {
               dispatch(themeActions.toggelTheme());

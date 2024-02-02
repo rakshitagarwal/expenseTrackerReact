@@ -17,8 +17,6 @@ import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 export default function Header() {
-  // const authCntxt = React.useContext(AuthContext);
-  // const hasExpenses = expenseCtx.expenses.length > 0;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [userData, setUserData] = useState(null);
@@ -30,7 +28,7 @@ export default function Header() {
   const updateVisibleHandler = async () => {
     try {
       const res = await fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyA4SAXHYrgiGDnv6iLxGnM6era5CLULX8M",
+        "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDeTrjpAdKVNqCov-5MwyTKP3LyJuKbC-o",
         {
           method: "POST",
           headers: {
@@ -44,8 +42,6 @@ export default function Header() {
       const data = await res.json();
       if (data.users) {
         setUserData(data.users[0]);
-        // nameRef.current.value = data.users[0].displayName.toUpperCase() || "";
-        // contactRef.current.value = data.users[0].photoUrl || "";
       }
 
       console.log("data", data);
@@ -59,8 +55,6 @@ export default function Header() {
   }, []);
 
   const handleLogout = () => {
-    // authCntxt.logout();
-
     if (isDarkMode === true) {
       dispatch(themeActions.toggelTheme());
     }

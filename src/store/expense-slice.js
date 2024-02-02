@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { useSelector } from "react-redux";
 
 const initialState = {
   items: [],
@@ -13,7 +12,6 @@ const expenseSlice = createSlice({
   reducers: {
     addItem(state, action) {
       state.items = [action.payload, ...state.items];
-      // console.log(state);
     },
     removeItem(state, action) {
       const itemId = action.payload.id;

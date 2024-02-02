@@ -32,14 +32,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
 
 export default function ExpenseTable(props) {
-  // const ExpenseCntxt = useContext(ExpenseContext);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const expense = useSelector((state) => state.expenseStore);
@@ -47,7 +45,6 @@ export default function ExpenseTable(props) {
 
   const editClickHandler = (item) => {
     const filter = expense.items.filter((ele) => ele !== item);
-    // expense.editItem(item, filter);
     dispatch(expenseActions.editItem({ item: item, filtered: filter }));
   };
 
@@ -59,14 +56,14 @@ export default function ExpenseTable(props) {
       .replace(".", "");
     try {
       const res = await axios.get(
-        `https://expense-tracker-1672f-default-rtdb.firebaseio.com/${editedEmail}/expenses.json`
+        `https://expense-tracker-6bd50-default-rtdb.firebaseio.com/${editedEmail}/expenses.json`
       );
 
       const data = res.data;
       const Id = Object.keys(data).find((eleId) => data[eleId].id === item.id);
       try {
         const res = await axios.delete(
-          `https://expense-tracker-1672f-default-rtdb.firebaseio.com/${editedEmail}/expenses/${Id}.json`
+          `https://expense-tracker-6bd50-default-rtdb.firebaseio.com/${editedEmail}/expenses/${Id}.json`
         );
       } catch (error) {
         alert(error);
@@ -84,7 +81,7 @@ export default function ExpenseTable(props) {
 
     try {
       const res = await axios.get(
-        `https://expense-tracker-1672f-default-rtdb.firebaseio.com/${editedEmail}/expenses.json`
+        `https://expense-tracker-6bd50-default-rtdb.firebaseio.com/${editedEmail}/expenses.json`
       );
       const data = res.data;
       if (data) {
@@ -117,7 +114,7 @@ export default function ExpenseTable(props) {
       .replace(".", "");
     try {
       const res = await axios.post(
-        `https://expense-tracker-1672f-default-rtdb.firebaseio.com/${editedEmail}/userDetail.json`,
+        `https://expense-tracker-6bd50-default-rtdb.firebaseio.com/${editedEmail}/userDetail.json`,
         { isPremium: true }
       );
     } catch (error) {
