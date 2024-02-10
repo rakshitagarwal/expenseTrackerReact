@@ -7,7 +7,6 @@ const initialAuthState = {
   isLoggedIn: localStorage.getItem("isLoggedIn"),
 };
 
-
 const authSlice = createSlice({
   name: "authentication",
   initialState: initialAuthState,

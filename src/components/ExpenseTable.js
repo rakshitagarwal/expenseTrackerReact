@@ -12,7 +12,6 @@ import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store/auth-slice";
 import { expenseActions } from "../store/expense-slice";
-import { themeActions } from "../store/theme-slice";
 import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
 
@@ -62,7 +61,7 @@ export default function ExpenseTable(props) {
       const data = res.data;
       const Id = Object.keys(data).find((eleId) => data[eleId].id === item.id);
       try {
-        const res = await axios.delete(
+        await axios.delete(
           `https://expense-tracker-6bd50-default-rtdb.firebaseio.com/${editedEmail}/expenses/${Id}.json`
         );
       } catch (error) {
@@ -107,13 +106,12 @@ export default function ExpenseTable(props) {
   });
 
   const clickActPremiumHandler = async () => {
-    dispatch(themeActions.toggelTheme());
     const editedEmail = localStorage
       .getItem("userEmail")
       .replace("@", "")
       .replace(".", "");
     try {
-      const res = await axios.post(
+      await axios.post(
         `https://expense-tracker-6bd50-default-rtdb.firebaseio.com/${editedEmail}/userDetail.json`,
         { isPremium: true }
       );

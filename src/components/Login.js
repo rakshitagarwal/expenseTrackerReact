@@ -14,16 +14,13 @@ import { authActions } from "../store/auth-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { themeActions } from "../store/theme-slice";
 import { expenseActions } from "../store/expense-slice";
 
 export default function LogIn() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const [loading, setLoading] = useState(false);
   const [isVerifyEmail, setIsVerifyEmail] = useState(false);
-  const isDarkMode = useSelector((state) => state.theme.isDark);
 
   const logoutTimerRef = useRef();
 
@@ -42,9 +39,6 @@ export default function LogIn() {
 
   const handleLogout = () => {
     clearTimeout(logoutTimerRef.current);
-    if (isDarkMode === true) {
-      dispatch(themeActions.toggelTheme());
-    }
     dispatch(authActions.logout());
     dispatch(expenseActions.setItemsEmpty());
     navigate("/login", { replace: true });
@@ -52,7 +46,6 @@ export default function LogIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true);
     const data = new FormData(event.currentTarget);
     const enteredEmail = data.get("email");
     const enteredPass = data.get("password");
@@ -103,7 +96,6 @@ export default function LogIn() {
               `https://expense-tracker-6bd50-default-rtdb.firebaseio.com/${email}/userDetail.json`
             );
             if (modeRes.data) {
-              dispatch(themeActions.toggelTheme());
               dispatch(authActions.setIsPremium());
               localStorage.setItem("isPremium", true);
             }
@@ -117,7 +109,6 @@ export default function LogIn() {
     } catch (error) {
       alert(error);
     }
-    setLoading(false);
   };
 
   return (

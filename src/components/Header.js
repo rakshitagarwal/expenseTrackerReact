@@ -9,8 +9,6 @@ import logo from "../assets/expenses.png";
 import { authActions } from "../store/auth-slice";
 import { expenseActions } from "../store/expense-slice";
 import { useDispatch, useSelector } from "react-redux";
-import { themeActions } from "../store/theme-slice";
-import Switch from "@mui/material/Switch";
 import { useState } from "react";
 import ProfileForm from "./ProfileForm";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
@@ -21,7 +19,6 @@ export default function Header() {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState(null);
   const auth = useSelector((state) => state.auth);
-  const isDarkMode = useSelector((state) => state.theme.isDark);
   const location = useLocation();
   const isLocation = location.pathname === "/profileform";
 
@@ -55,16 +52,9 @@ export default function Header() {
   }, []);
 
   const handleLogout = () => {
-    if (isDarkMode === true) {
-      dispatch(themeActions.toggelTheme());
-    }
     dispatch(authActions.logout());
     dispatch(expenseActions.setItemsEmpty());
     navigate("/login", { replace: true });
-  };
-
-  const clickModeHandler = async () => {
-    dispatch(themeActions.toggelTheme());
   };
 
   return (
@@ -103,11 +93,6 @@ export default function Header() {
           {auth.isPremium && (
             <>
               <WbSunnyOutlinedIcon />
-              <Switch
-                defaultChecked
-                color="warning"
-                onChange={clickModeHandler}
-              />
               <DarkModeIcon style={{ marginRight: 8 }} />
             </>
           )}
